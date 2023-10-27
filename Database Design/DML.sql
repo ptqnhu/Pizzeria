@@ -1,3 +1,7 @@
+--  DISCLAIMER
+--  To the best of my knowledge, this data is fabricated, and it does not correspond to real people. 
+--  Any similarity to existing people is purely coincidental.
+
 INSERT INTO MenuItem (MenuItemID, MenuItemName, MenuItemCategory, MenuItemSize, MenuItemPrice)
 VALUES
     ('MI101',  'Margherita - Regular ',  'Pizza',  'Regular', 13)
