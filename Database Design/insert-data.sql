@@ -1,5 +1,5 @@
 --  DISCLAIMER
---  To the best of my knowledge, this data is fabricated, and it does not correspond to real people. 
+--  This data is fabricated, and it does not correspond to real people. 
 --  Any similarity to existing people is purely coincidental.
 
 INSERT INTO MenuItem (MenuItemID, MenuItemName, MenuItemCategory, MenuItemSize, MenuItemPrice)
