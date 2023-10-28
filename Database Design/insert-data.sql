@@ -2,8 +2,8 @@
 --  This data is fabricated, and it does not correspond to real people. 
 --  Any similarity to existing people is purely coincidental.
 
-INSERT INTO MenuItem (MenuItemID, MenuItemName, MenuItemCategory, MenuItemSize, MenuItemPrice)
-VALUES
+
+INSERT INTO MenuItem VALUES
     ('MI101',  'Margherita - Regular ',  'Pizza',  'Regular', 13)
     , ('MI102',  'Margherita - Large',  'Pizza',  'Large', 15)
     , ('MI103',  'Diavola - Regular',  'Pizza',  'Regular', 16)
@@ -30,42 +30,40 @@ VALUES
 ;
 
 
-INSERT INTO Ingredient (IngredientID, IngredientName, IngredientWeight, PurchasedPrice, StockQuantity)
-VALUES
-    ('IN001', 'Pizza Dough Ball (8 pack)', 2000, 4.22, 200)
-    , ('IN002', 'Tomato Sauce', 4500, 3.89, 200)
-    , ('IN003', 'Mozzarella Cheese', 2500, 14.45, 200)
-    , ('IN004', 'Dried Oregano', 500, 5.99, 50)
-    , ('IN005', 'Spicy Salami', 3500, 37.64, 50)
-    , ('IN006', 'Chilli Pepper', 1000, 6.49, 50)
-    , ('IN007', 'Eggplant', 1000, 1.9, 50)
-    , ('IN008', 'Parmesan Cheese', 2500, 18.75, 100)
-    , ('IN009', 'Gorgonzola Cheese', 3500, 27.64, 100)
-    , ('IN010', 'Ricotta Cheese', 1500, 3.99, 100)
-    , ('IN011', 'Pepperoni', 2500, 24.18, 100)
-    , ('IN012', 'Shrimp', 1000, 8.98, 50)
-    , ('IN013', 'Tuna', 2000, 7.66, 50)
-    , ('IN014', 'Calamari', 2500, 28.77, 50)
-    , ('IN015', 'Ham', 5000, 32.45, 50)
-    , ('IN016', 'Pineapple', 5000, 6.23, 50)
-    , ('IN017', 'Ciabatta dough (20 pack)', 7000, 22.34, 100)
-    , ('IN018', 'Garlic and Parsley Butter', 3000, 52.1, 20)
-    , ('IN019', 'Croutons', 1250, 5.25, 50)
-    , ('IN020', 'Romain Lettuce', 7500, 13.72, 50)
-    , ('IN021', 'Caesar Dressing', 3800, 17.89, 50)
-    , ('IN022', 'Chicken Wings', 6000, 69.83, 100)
-    , ('IN023', 'Franks RedHot Buffalo Wings Sauce', 3500, 63.52, 10)
-    , ('IN024', 'Coca Cola - Regular', 330, 1.45, 200)
-    , ('IN025', 'Coca Cola - Large', 1500, 4.25, 200)
-    , ('IN026', 'Diet Coke - Regular', 330, 1.45, 200)
-    , ('IN027', 'Diet Coke - Large', 1500, 4.25, 200)
-    , ('IN028', '7 Up - Regular', 330, 1.45, 200)
-    , ('IN029', '7 Up - Large', 1500, 4.25, 200)
+INSERT INTO Ingredient VALUES
+    ('IN001', 'Pizza Dough Ball (8 pack)', 2000, 4.22)
+    , ('IN002', 'Tomato Sauce', 4500, 3.89)
+    , ('IN003', 'Mozzarella Cheese', 2500, 14.45)
+    , ('IN004', 'Dried Oregano', 500, 5.99)
+    , ('IN005', 'Spicy Salami', 3500, 37.64)
+    , ('IN006', 'Chilli Pepper', 1000, 6.49)
+    , ('IN007', 'Eggplant', 1000, 1.9)
+    , ('IN008', 'Parmesan Cheese', 2500, 18.75)
+    , ('IN009', 'Gorgonzola Cheese', 3500, 27.64)
+    , ('IN010', 'Ricotta Cheese', 1500, 3.99)
+    , ('IN011', 'Pepperoni', 2500, 24.18)
+    , ('IN012', 'Shrimp', 1000, 8.98)
+    , ('IN013', 'Tuna', 2000, 7.66)
+    , ('IN014', 'Calamari', 2500, 28.77)
+    , ('IN015', 'Ham', 5000, 32.45)
+    , ('IN016', 'Pineapple', 5000, 6.23)
+    , ('IN017', 'Ciabatta dough (20 pack)', 7000, 22.34)
+    , ('IN018', 'Garlic and Parsley Butter', 3000, 52.1)
+    , ('IN019', 'Croutons', 1250, 5.25)
+    , ('IN020', 'Romain Lettuce', 7500, 13.72)
+    , ('IN021', 'Caesar Dressing', 3800, 17.89)
+    , ('IN022', 'Chicken Wings', 6000, 69.83)
+    , ('IN023', 'Franks RedHot Buffalo Wings Sauce', 3500, 63.52)
+    , ('IN024', 'Coca Cola - Regular', 330, 1.45)
+    , ('IN025', 'Coca Cola - Large', 1500, 4.25)
+    , ('IN026', 'Diet Coke - Regular', 330, 1.45)
+    , ('IN027', 'Diet Coke - Large', 1500, 4.25)
+    , ('IN028', '7 Up - Regular', 330, 1.45)
+    , ('IN029', '7 Up - Large', 1500, 4.25)
 ;
 
 
-INSERT INTO Recipe (MenuItemID, IngredientID, RecipeQuantity)
-VALUES
+INSERT INTO Recipe VALUES
     ('MI101', 'IN001', 250)
     , ('MI101', 'IN002', 80)
     , ('MI101', 'IN003', 170)
@@ -153,10 +151,40 @@ VALUES
 ;
 
 
-SET IDENTITY_INSERT Customer ON;
+INSERT INTO Inventory VALUES
+    ('IN001', 200, 50, 10)
+    , ('IN002', 50, 10, 5)
+    , ('IN003', 100, 50, 10)
+    , ('IN004', 5, 2, 1)
+    , ('IN005', 5, 2, 1)
+    , ('IN006', 5, 2, 1)
+    , ('IN007', 50, 20, 10)
+    , ('IN008', 50, 20, 10)
+    , ('IN009', 20, 10, 5)
+    , ('IN010', 20, 10, 5)
+    , ('IN011', 50, 20, 10)
+    , ('IN012', 50, 20, 10)
+    , ('IN013', 10, 10, 5)
+    , ('IN014', 10, 10, 5)
+    , ('IN015', 10, 10, 5)
+    , ('IN016', 10, 10, 5)
+    , ('IN017', 10, 10, 5)
+    , ('IN018', 10, 5, 3)
+    , ('IN019', 20, 10, 5)
+    , ('IN020', 10, 5, 3)
+    , ('IN021', 10, 5, 3)
+    , ('IN022', 10, 10, 5)
+    , ('IN023', 10, 5, 3)
+    , ('IN024', 200, 50, 20)
+    , ('IN025', 200, 50, 20)
+    , ('IN026', 200, 50, 20)
+    , ('IN027', 200, 50, 20)
+    , ('IN028', 200, 50, 20)
+    , ('IN029', 200, 50, 20)
+;
 
-INSERT INTO Customer (CustomerID, CustomerFirstName, CustomerLastName, CustomerBirthDate, CustomerGender, CustomerPhoneNumber)
-VALUES
+
+INSERT INTO Customer VALUES
     ('1', 'Saloma', 'Boodell', '1997/11/27', 'F', '554-409-6836')
     , ('2', 'Barnebas', 'Perott', '2010/05/27', 'M', '398-554-8830')
     , ('3', 'Diann', 'Disdel', '1999/09/18', 'F', '743-769-2462')
@@ -313,12 +341,9 @@ VALUES
     , ('154', 'Shanna', 'Alyokhin', '1982/12/07', 'F', '153-361-0132')
     , ('155', 'Alyss', 'Noteyoung', '1991/10/29', 'F', '720-616-6775')
 ;
-SET IDENTITY_INSERT Customer OFF;
 
 
-SET IDENTITY_INSERT Address ON;
-INSERT INTO Address (ShippingAddressID, ShippingStreet, ShippingCity, ShippingZipCode)
-VALUES
+INSERT INTO Address VALUES
     (1, '431 Ronald Regan Road', 'Sherrinford', 61000)
     , (2, '51169 Karstens Point', 'Melrose', 55000)
     , (3, '77473 Eastwood Street', 'Arkdale', 42000)
@@ -475,11 +500,9 @@ VALUES
     , (154, '02 Cascade Park', 'Cordova', 23000)
     , (155, '67223 Oakridge Junction', 'Wycaster', 98000)
 ;
-SET IDENTITY_INSERT Address OFF;
 
 
-INSERT INTO OrderHeader (OrderID, CustomerID, OrderDate, OrderTime, ShippingAddressID, OrderTotal, Orderstatus)
-VALUES
+INSERT INTO OrderHeader VALUES
     ('202301001', 1, '2023/01/01', '12:21:44', 1, 16, 'Shipped')
     , ('202301002', 2, '2023/01/01', '18:26:36', 2, 18, 'Shipped')
     , ('202301003', 3, '2023/01/01', '18:40:54', 3, 9, 'Shipped')
@@ -878,8 +901,7 @@ VALUES
 ;
 
 
-INSERT INTO OrderDetail (OrderID, MenuItemID, QuantityOrdered, ItemPrice)
-VALUES
+INSERT INTO OrderDetail VALUES
     ('202301001', 'MI103', 1, 16)
     , ('202301002', 'MI109', 1, 15)
     , ('202301002', 'MI301', 1, 3)
@@ -1709,8 +1731,7 @@ VALUES
 ;
 
 
-INSERT INTO Employee (EmployeeID, EmpFirstName, EmpLastName, EmpRole, HireDate, HourlyRate)
-VALUES
+INSERT INTO Employee VALUES
     ('EM001', 'Monica', 'Geller', 'Head Chef', '2022/12/25', 21.5)
     , ('EM002', 'Rachel', 'Green', 'Head Chef', '2022/12/25', 21.5)
     , ('EM003', 'Janice', 'Goralnik', 'Chef', '2022/12/25', 17.25)
@@ -1722,8 +1743,7 @@ VALUES
 ;
 
 
-INSERT INTO Shift (ShiftID, DateOfWeek, StartTime, EndTime)
-VALUES
+INSERT INTO Shift VALUES
     ('SH001', 'Monday', '11:00:00', '15:00:00')
     , ('SH002', 'Monday', '18:00:00', '22:00:00')
     , ('SH003', 'Tuesday', '11:00:00', '15:00:00')
@@ -1741,9 +1761,7 @@ VALUES
 ;
 
 
-SET IDENTITY_INSERT Rotation ON;
-INSERT INTO Rotation (RotationID, Date, ShiftID, EmployeeID)
-VALUES
+INSERT INTO Rotation VALUES
     (1, '2023/01/01', 'SH013', 'EM001')
     , (2, '2023/01/01', 'SH013', 'EM003')
     , (3, '2023/01/01', 'SH013', 'EM005')
@@ -1992,5 +2010,4 @@ VALUES
     , (246, '2023/01/31', 'SH004', 'EM004')
     , (247, '2023/01/31', 'SH004', 'EM007')
     , (248, '2023/01/31', 'SH004', 'EM006')
-;
-SET IDENTITY_INSERT Rotation OFF;
+    ;
