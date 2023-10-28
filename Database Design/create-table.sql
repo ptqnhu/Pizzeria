@@ -10,7 +10,7 @@ CREATE TABLE MenuItem (
     , MenuItemSize  VARCHAR(10)  NOT NULL
     , MenuItemPrice  DECIMAL(5,2)  NOT NULL
     , CONSTRAINT PK_MenuItem_MenuItemID PRIMARY KEY CLUSTERED (MenuItemID)
-    , CONSTRAINT AK_MenuItemName UNIQUE (MenuItemName)
+    , CONSTRAINT AK_MenuItem_MenuItemName UNIQUE (MenuItemName)
 )
 ;
 
@@ -20,9 +20,8 @@ CREATE TABLE Ingredient (
     , IngredientName  VARCHAR(50)  NOT NULL
     , IngredientWeight  INT  NOT NULL
     , PurchasedPrice  DECIMAL(5,2)  NOT NULL
-    , StockQuantity  INT  NOT NULL
-    , CONSTRAINT PK_Ingredient_IngredientID PRIMARY KEY (IngredientID)
-    , CONSTRAINT AK_IngredientName UNIQUE (IngredientName)
+    , CONSTRAINT PK_Ingredient_IngredientID PRIMARY KEY CLUSTERED (IngredientID)
+    , CONSTRAINT AK_Ingredient_IngredientName UNIQUE (IngredientName)
 )
 ;
 
@@ -32,8 +31,19 @@ CREATE TABLE Recipe (
     , IngredientID  VARCHAR(5)  NOT NULL
     , RecipeQuantity  INT  NOT NULL
     , CONSTRAINT PK_Recipe_MenuItemID_IngredientID PRIMARY KEY (MenuItemID, IngredientID)
-    , CONSTRAINT FK_Recipe_MenuItemID FOREIGN KEY (MenuItemID) REFERENCES MenuItem (MenuItemID)
-    , CONSTRAINT FK_Recipe_Ingredient_ID FOREIGN KEY (IngredientID) REFERENCES Ingredient (IngredientID)
+    , CONSTRAINT FK_Recipe_MenuItem_MenuItemID FOREIGN KEY (MenuItemID) REFERENCES MenuItem (MenuItemID)
+    , CONSTRAINT FK_Recipe_Ingredient_Ingredient_ID FOREIGN KEY (IngredientID) REFERENCES Ingredient (IngredientID)
+)
+;
+
+
+CREATE TABLE Inventory (
+    IngredientID VARCHAR(5) NOT NULL
+    , StockQuantity INT NOT NULL
+    , ReorderPoint INT NOT NULL
+    , SafetyStockLevel INT NOT NULL
+    , CONSTRAINT PK_Inventory_InventoryID PRIMARY KEY (IngredientID)
+    , CONSTRAINT FK_Inventory_Ingredient_IngredientID FOREIGN KEY (IngredientID) REFERENCES Ingredient (IngredientID)
 )
 ;
 
@@ -42,17 +52,12 @@ CREATE TABLE Customer (
     CustomerID  INT  NOT NULL
     , CustomerFirstName  VARCHAR(50)  NOT NULL
     , CustomerLastName  VARCHAR(50)   NOT NULL
-    , CustomerBirthdate  DATE  NOT NULL
+    , CustomerBirthDate  DATE  NOT NULL
     , CustomerGender  VARCHAR(1)  NOT NULL CHECK (CustomerGender IN ('M', 'F'))
     , CustomerPhoneNumber  VARCHAR(12)  NOT NULL
     , CONSTRAINT PK_Customer_CustomerID PRIMARY KEY NONCLUSTERED (CustomerID)
+    , 
 )
-;
-
-
-CREATE NONCLUSTERED INDEX IX_Customer_NCI
-    ON Customer(CustomerFirstName, CustomerLastName)
-    INCLUDE(CustomerPhoneNumber)
 ;
 
 
@@ -73,10 +78,10 @@ CREATE TABLE OrderHeader (
     , OrderTime  TIME  NOT NULL
     , ShippingAddressID  INT  NOT NULL
     , OrderTotal  DECIMAL(5,2)  NOT NULL
-    , OrderStatus   VARCHAR(10)  NOT NULL
+    , OrderStatus   VARCHAR(20)  NOT NULL
     , CONSTRAINT PK_OrderHeader_OrderID PRIMARY KEY CLUSTERED (OrderID)
-    , CONSTRAINT FK_OrderHeader_CustomerID FOREIGN KEY (CustomerID) REFERENCES Customer (CustomerID)
-    , CONSTRAINT FK_OrderHeader_ShippingAddressID FOREIGN KEY (ShippingAddressID) REFERENCES Address (ShippingAddressID)
+    , CONSTRAINT FK_OrderHeader_Customer_CustomerID FOREIGN KEY (CustomerID) REFERENCES Customer (CustomerID)
+    , CONSTRAINT FK_OrderHeader_Address_ShippingAddressID FOREIGN KEY (ShippingAddressID) REFERENCES Address (ShippingAddressID)
 )
 ;
 
@@ -85,10 +90,10 @@ CREATE TABLE OrderDetail (
     OrderID  VARCHAR(9)  NOT NULL
     , MenuItemID  VARCHAR(5)  NOT NULL
     , QuantityOrdered  INT  NOT NULL
-    , ItemPrice  DECIMAL(5,2)  NOT NULL
+    , ItemTotal  DECIMAL(5,2)  NOT NULL
     , CONSTRAINT PK_OrderDetail_OrderID_MenuItemID PRIMARY KEY (OrderID, MenuItemID)
-    , CONSTRAINT FK_OrderDetail_OrderID FOREIGN KEY (OrderID) REFERENCES OrderHeader (OrderID)
-    , CONSTRAINT FK_OrderDetail_MenuItemID FOREIGN KEY (MenuItemID) REFERENCES MenuItem (MenuItemID)
+    , CONSTRAINT FK_OrderDetail_OrderHeader_OrderID FOREIGN KEY (OrderID) REFERENCES OrderHeader (OrderID)
+    , CONSTRAINT FK_OrderDetail_MenuItem_MenuItemID FOREIGN KEY (MenuItemID) REFERENCES MenuItem (MenuItemID)
 )
 ;
 
@@ -100,7 +105,7 @@ CREATE TABLE Employee (
     , EmpRole  VARCHAR(50)  NOT NULL CHECK (EmpRole IN ('Head Chef', 'Chef', 'Delivery rider'))
     , HireDate  DATE  NOT NULL
     , HourlyRate  DECIMAL(5,2)  NOT NULL CHECK (HourlyRate >= 10)
-    , CONSTRAINT PK_Employee_EmployeeID PRIMARY KEY (EmployeeID)
+    , CONSTRAINT PK_Employee_EmployeeID PRIMARY KEY CLUSTERED (EmployeeID)
 )
 ;
 
@@ -110,18 +115,18 @@ CREATE TABLE Shift (
     , DateOfWeek  VARCHAR(20)  NOT NULL
     , StartTime  TIME  NOT NULL
     , EndTime  TIME  NOT NULL
-    , CONSTRAINT PK_Shift_ShiftID PRIMARY KEY (ShiftID)
+    , CONSTRAINT PK_Shift_ShiftID PRIMARY KEY CLUSTERED (ShiftID)
 )
 ;
 
 
 CREATE TABLE Rotation (
-    RotationID  INT  IDENTITY(1,1)  NOT NULL
+    RotationID  INT  NOT NULL
     , Date  DATE  NOT NULL
     , ShiftID  VARCHAR(5)  NOT NULL
     , EmployeeID  VARCHAR(5)  NOT NULL
     , CONSTRAINT PK_Rotation_RotationID PRIMARY KEY (RotationID)
-    , CONSTRAINT FK_Rotation_ShiftID FOREIGN KEY (ShiftID) REFERENCES Shift (ShiftID)
-    , CONSTRAINT FK_Rotation_EmployeeID FOREIGN KEY (EmployeeID) REFERENCES Employee (EmployeeID)
+    , CONSTRAINT FK_Rotation_Shift_ShiftID FOREIGN KEY (ShiftID) REFERENCES Shift (ShiftID)
+    , CONSTRAINT FK_Rotation_Employee_EmployeeID FOREIGN KEY (EmployeeID) REFERENCES Employee (EmployeeID)
 )
 ;
