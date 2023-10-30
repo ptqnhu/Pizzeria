@@ -42,7 +42,7 @@ CREATE TABLE Inventory (
     , StockQuantity INT NOT NULL
     , ReorderPoint INT NOT NULL
     , SafetyStockLevel INT NOT NULL
-    , CONSTRAINT PK_Inventory_InventoryID PRIMARY KEY (IngredientID)
+    , CONSTRAINT PK_Inventory_IngredientID PRIMARY KEY (IngredientID)
     , CONSTRAINT FK_Inventory_Ingredient_IngredientID FOREIGN KEY (IngredientID) REFERENCES Ingredient (IngredientID)
 )
 ;
